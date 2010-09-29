@@ -1,0 +1,4 @@
+?package(galinette):needs="X11" \
+ section="Applications/Utilities" \
+ title="Galinette" \
+ command="/usr/bin/galinette"

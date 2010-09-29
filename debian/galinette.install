@@ -1,0 +1,4 @@
+usr/bin/galinette
+usr/share
+debian/galinette.desktop	usr/share/applications
+debian/galinette.xpm      	usr/share/pixmaps

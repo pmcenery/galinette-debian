@@ -1,0 +1,6 @@
+#!/usr/bin/make -f
+# -*- mode: makefile; coding: utf-8 -*-
+# Copyright © 20010 Paul McEnery <pmcenery@gmail.com>
+
+%:
+	dh --buildsystem=cmake $@

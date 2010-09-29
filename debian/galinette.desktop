@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Galinette
+Comment=Application for flasing Flymaster® B1 avionics devices
+GenericName=Flymaster® B1 Flash Utility
+X-GNOME-FullName=Flymaster® B1 Flash Utility
+Categories=GNOME;GTK;Utilities;
+Exec=galinette %U
+Icon=galinette
+Terminal=false
+Type=Application
+StartupNotify=true
