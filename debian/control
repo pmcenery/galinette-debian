@@ -17,7 +17,7 @@ Homepage: http://galinette.sourceforge.net
 Package: libgalinette-dev
 Section: libdevel
 Architecture: any
-Depends: libgalinette0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libgalinette (= ${binary:Version})
 Description: Library for communicating with Flymaster® B1 avionics devices
  Galinette is a complete flight suite for Flymaster® B1 avionics devices.
  The project is an Open Source initiative which is in no way affiliated with
@@ -32,7 +32,7 @@ Description: Library for communicating with Flymaster® B1 avionics devices
  .
  This package contains the development files
 
-Package: libgalinette0
+Package: libgalinette
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -51,7 +51,7 @@ Description: Library for communicating with Flymaster® B1 avionics devices
 Package: galinette-nox
 Section: utils
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libgalinette0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libgalinette (= ${binary:Version})
 Description: CLI for communicating with Flymaster® B1 avionics devices
  Galinette is a complete flight suite for Flymaster® B1 avionics devices.
  The project is an Open Source initiative which is in no way affiliated with
@@ -69,7 +69,7 @@ Description: CLI for communicating with Flymaster® B1 avionics devices
 Package: galinette
 Section: utils
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libgalinette0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libgalinette (= ${binary:Version})
 Description: GUI for communicating with Flymaster® B1 avionics devices
  Galinette is a complete flight suite for Flymaster® B1 avionics devices.
  The project is an Open Source initiative which is in no way affiliated with
