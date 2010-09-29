@@ -1,0 +1,9 @@
+galinette (1.1); urgency=low
+
+  * Purged repository from binary files
+  * Fixed a bug in firmware integrity check
+  * Added info files
+  * Added GNU/GPLv2 headers
+  * Fixed some cmakes issues
+
+ -- Boris Lechner <boris.lechner@dev.gmail.com>  Sun, 24 Jan 2010 19:30:00 +0200

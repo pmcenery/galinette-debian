@@ -1,0 +1,38 @@
+Basic Installation
+==================
+
+        Galinette uses the cmake build system. The simple instructions for
+building Galinette are these commands:
+
+                        mkdir ../galinette-build && cd ../galinette-build
+                        cmake ../galinette
+                        make
+                        make install
+
+        This will not work unless necessary prerequisites are met. These are:
+
+                        dbus-1
+                        dbus-glib-1
+                        libftdi
+                        libglade-2.0
+                        gtk+-2.0
+                        hal
+
+        Various components of Galinette listed above have other dependencies
+as well. If these are not met when the 'cmake' command is run, those components
+will not be built. The output of 'cmake' should make it clear what these
+dependencies are and how to meet them.
+
+        Arguments can be given to cmake similar to those given to a traditional
+configure script, like the install prefix. See 'cmake --help-full' for more
+information. For example, 'configure --prefix=/usr/lib' translates to
+'cmake -DCMAKE_INSTALL_PREFIX=/usr/lib'.
+
+
+
+Support
+=======
+
+If you want to contribute, or if you need support with this project, you can
+suscribe to the support mailing list on this page
+https://lists.sourceforge.net/lists/listinfo/galinette-support
