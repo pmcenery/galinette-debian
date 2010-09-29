@@ -1,0 +1,33 @@
+From: Paul McEnery <pmcenery@gmail.com>
+Subject: Removes overkill library linking
+ 
+--- a/galinette-cli/CMakeLists.txt
++++ b/galinette-cli/CMakeLists.txt
+@@ -3,10 +3,10 @@
+ pkg_check_modules (FTDI  REQUIRED  libftdi>=0.13)
+ 
+ # Include & build
+-include_directories   (. ../libgalinette ${FTDI_INCLUDE_DIRS})
++include_directories   (. ../libgalinette)
+ add_executable        (galinette-flash galinette-flash.c)
+ add_dependencies      (galinette-flash libgalinette)
+-target_link_libraries (galinette-flash libgalinette ${FTDI_LIBRARIES})
++target_link_libraries (galinette-flash libgalinette)
+ 
+ # Install
+ install (TARGETS galinette-flash DESTINATION ${bindir})
+--- a/galinette-gtk/CMakeLists.txt
++++ b/galinette-gtk/CMakeLists.txt
+@@ -12,10 +12,10 @@
+ add_definitions(-DGALINETTE_VERSION="${GALINETTE_VERSION}")
+ 
+ # Include & build
+-include_directories   (. ${DBUS_INCLUDE_DIRS} ${DBUS-GLIB_INCLUDE_DIRS} ${FTDI_INCLUDE_DIRS} ${GLADE_INCLUDE_DIRS} ${GTK2_INCLUDE_DIRS} ${HAL_INCLUDE_DIRS})
++include_directories   (.)
+ add_executable        (galinette callbacks.c callbacks.h galinette-gtk.c galinette_gtk.glade galinette-gtk.h hal.c hal.h main.c)
+ add_dependencies      (galinette libgalinette)
+-target_link_libraries (galinette libgalinette ${DBUS_LIBRARIES} ${DBUS-GLIB_LIBRARIES} ${FTDI_LIBRARIES} ${GLADE_LIBRARIES} ${GTK2_LIBRARIES} ${HAL_LIBRARIES})
++target_link_libraries (galinette libgalinette)
+ 
+ # Other resources
+ add_custom_target (galinette_gtk.glade)

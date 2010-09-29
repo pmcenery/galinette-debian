@@ -13,11 +13,13 @@ Build-Depends: quilt (>= 0.46-7~),
 Standards-Version: 3.8.4
 Section: utils
 Homepage: http://galinette.sourceforge.net
+Vcs-Git: http://github.com/pmcenery/galinette-debian.git
+Vcs-Browser: http://github.com/pmcenery/galinette-debian
 
 Package: libgalinette-dev
 Section: libdevel
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libgalinette (= ${binary:Version})
+Depends: ${misc:Depends}, libgalinette0 (= ${binary:Version})
 Description: Library for communicating with Flymaster® B1 avionics devices
  Galinette is a complete flight suite for Flymaster® B1 avionics devices.
  The project is an Open Source initiative which is in no way affiliated with
@@ -51,7 +53,7 @@ Description: Library for communicating with Flymaster® B1 avionics devices
 Package: galinette-nox
 Section: utils
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libgalinette (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libgalinette0 (= ${binary:Version})
 Description: CLI for communicating with Flymaster® B1 avionics devices
  Galinette is a complete flight suite for Flymaster® B1 avionics devices.
  The project is an Open Source initiative which is in no way affiliated with
@@ -69,7 +71,7 @@ Description: CLI for communicating with Flymaster® B1 avionics devices
 Package: galinette
 Section: utils
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libgalinette (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libgalinette0 (= ${binary:Version})
 Description: GUI for communicating with Flymaster® B1 avionics devices
  Galinette is a complete flight suite for Flymaster® B1 avionics devices.
  The project is an Open Source initiative which is in no way affiliated with
