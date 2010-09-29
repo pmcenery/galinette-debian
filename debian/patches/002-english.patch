@@ -1,0 +1,23 @@
+From: Paul McEnery <pmcenery@gmail.com>
+Subject: Crude change of language to English
+
+--- a/galinette-gtk/galinette_gtk.glade
++++ b/galinette-gtk/galinette_gtk.glade
+@@ -34,7 +34,7 @@
+             <child>
+               <widget class="GtkMenuItem" id="mnu_file">
+                 <property name="visible">True</property>
+-                <property name="label" translatable="yes">_Fichier</property>
++                <property name="label" translatable="yes">_File</property>
+                 <property name="use_underline">True</property>
+                 <child>
+                   <widget class="GtkMenu" id="menu1">
+@@ -55,7 +55,7 @@
+             <child>
+               <widget class="GtkMenuItem" id="mnu_about">
+                 <property name="visible">True</property>
+-                <property name="label" translatable="yes">Aid_e</property>
++                <property name="label" translatable="yes">_Help</property>
+                 <property name="use_underline">True</property>
+                 <child>
+                   <widget class="GtkMenu" id="menu3">
