@@ -1,0 +1,83 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,11 +1,14 @@
+ cmake_minimum_required (VERSION 2.6)
+ 
+-set(GALINETTE_VERSION   "1.1"             CACHE STRING   "Software version" FORCE)
+-set(bindir              "bin"             CACHE FILEPATH "bin directory"    FORCE)
+-set(libdir              "lib"             CACHE FILEPATH "lib directory"    FORCE)
+-set(sharedir            "share/galinette" CACHE FILEPATH "share directory"  FORCE)
++project(galinette)
++
++set(GALINETTE_VERSION         "1.1"             CACHE STRING   "Software version" FORCE)
++set(bindir                    "bin"             CACHE FILEPATH "bin directory"    FORCE)
++set(libdir                    "lib"             CACHE FILEPATH "lib directory"    FORCE)
++set(sharedir                  "share/galinette" CACHE FILEPATH "share directory"  FORCE)
++set(CMAKE_EXE_LINKER_FLAGS    "-Wl,--as-needed -Wl,--no-undefined ${CMAKE_EXE_LINKER_FLAGS}")
++set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--as-needed ${CMAKE_SHARED_LINKER_FLAGS}")
+ 
+-project          (galinette)
+ add_definitions  (-Wall)
+ 
+ add_subdirectory (libgalinette)
+--- a/libgalinette/CMakeLists.txt
++++ b/libgalinette/CMakeLists.txt
+@@ -1,7 +1,12 @@
++# Dependencies
++find_package          (PkgConfig)
++pkg_check_modules     (FTDI  REQUIRED  libftdi>=0.13)
++
+ # Include & build
+ include_directories   (.)
+ add_library           (libgalinette SHARED device.c error.c firmware.c flash.c libgalinette.h libgalinette-private.h)
+-set_target_properties (libgalinette PROPERTIES PREFIX "")
++set_target_properties (libgalinette PROPERTIES PREFIX "" LINK_INTERFACE_LIBRARIES "" SOVERSION 0) 
++target_link_libraries (libgalinette ${FTDI_LIBRARIES})
+ 
+ # Install
+ install (TARGETS libgalinette LIBRARY DESTINATION ${libdir})
+--- a/galinette-cli/CMakeLists.txt
++++ b/galinette-cli/CMakeLists.txt
+@@ -1,12 +1,8 @@
+-# Dependencies
+-find_package      (PkgConfig)
+-pkg_check_modules (FTDI  REQUIRED  libftdi>=0.13)
+-
+ # Include & build
+-include_directories   (. ../libgalinette ${FTDI_INCLUDE_DIRS})
++include_directories   (. ../libgalinette)
+ add_executable        (galinette-flash galinette-flash.c)
+ add_dependencies      (galinette-flash libgalinette)
+-target_link_libraries (galinette-flash libgalinette ${FTDI_LIBRARIES})
++target_link_libraries (galinette-flash libgalinette)
+ 
+ # Install
+ install (TARGETS galinette-flash DESTINATION ${bindir})
+--- a/galinette-gtk/CMakeLists.txt
++++ b/galinette-gtk/CMakeLists.txt
+@@ -2,7 +2,6 @@
+ find_package      (PkgConfig)
+ pkg_check_modules (DBUS       REQUIRED   dbus-1>=1.2.12)
+ pkg_check_modules (DBUS-GLIB  REQUIRED   dbus-glib-1>=0.80)
+-pkg_check_modules (FTDI       REQUIRED   libftdi>=0.13)
+ pkg_check_modules (GLADE      REQUIRED   libglade-2.0>=2.6.4)
+ pkg_check_modules (GTK2       REQUIRED   gtk+-2.0>=2.16.1)
+ pkg_check_modules (HAL        REQUIRED   hal>=0.5.12)
+@@ -12,10 +11,10 @@
+ add_definitions(-DGALINETTE_VERSION="${GALINETTE_VERSION}")
+ 
+ # Include & build
+-include_directories   (. ${DBUS_INCLUDE_DIRS} ${DBUS-GLIB_INCLUDE_DIRS} ${FTDI_INCLUDE_DIRS} ${GLADE_INCLUDE_DIRS} ${GTK2_INCLUDE_DIRS} ${HAL_INCLUDE_DIRS})
++include_directories   (. ${DBUS_INCLUDE_DIRS} ${DBUS-GLIB_INCLUDE_DIRS} ${GLADE_INCLUDE_DIRS} ${GTK2_INCLUDE_DIRS} ${HAL_INCLUDE_DIRS})
+ add_executable        (galinette callbacks.c callbacks.h galinette-gtk.c galinette_gtk.glade galinette-gtk.h hal.c hal.h main.c)
+ add_dependencies      (galinette libgalinette)
+-target_link_libraries (galinette libgalinette ${DBUS_LIBRARIES} ${DBUS-GLIB_LIBRARIES} ${FTDI_LIBRARIES} ${GLADE_LIBRARIES} ${GTK2_LIBRARIES} ${HAL_LIBRARIES})
++target_link_libraries (galinette libgalinette ${DBUS_LIBRARIES} ${DBUS-GLIB_LIBRARIES} ${GLADE_LIBRARIES} ${GTK2_LIBRARIES} ${HAL_LIBRARIES})
+ 
+ # Other resources
+ add_custom_target (galinette_gtk.glade)
+@@ -23,4 +22,3 @@
+ # Install
+ install (TARGETS galinette           DESTINATION ${bindir})
+ install (FILES   galinette_gtk.glade DESTINATION ${sharedir})
+-
